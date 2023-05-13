@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moduration-deply
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moduration
+  template:
+    metadata:
+      labels:
+        app: moduration
+    spec:
+      containers:
+        - name: posts
+          image: sostene/moduration
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moduration-srv
+spec:
+  selector:
+    app: moduration
+  ports:
+    - name: moduration
+      protocol: TCP
+      port: 4003
+      targetPort: 4003

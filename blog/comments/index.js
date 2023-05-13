@@ -18,7 +18,7 @@ app.post('/posts/:id/comments', async (req, res) => {
   const id = randomBytes(4).toString('hex');
   commentsByPostId[postId] = commentsByPostId[postId] || [];
   commentsByPostId[postId].push({ id, content, status: 'pending' });
-  await axios.post('http://localhost:4005/events', {
+  await axios.post('http://event-bus-service:4005/events', {
     type: 'CommentCreated',
     data: {
       id,
@@ -40,7 +40,7 @@ app.post('/events', async (req, res) => {
       let { id, postId, status, content } = data;
       const comment = commentsByPostId[postId].find((comment) => comment.id == id);
       comment.status = status;
-      await axios.post('http://localhost:4005/events', {
+      await axios.post('http://event-bus-servicet:4005/events', {
         type: 'CommentUpdated',
         data: {
           id,
