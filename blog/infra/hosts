@@ -1,4 +1,4 @@
-127.0.0.1 posts.blog.com
-127.0.0.1 comments.blog.com
-127.0.0.1 query.blog.com
-127.0.0.1 blog.com
+127.0.0.1 posts.blog.local
+127.0.0.1 comments.blog.local
+127.0.0.1 query.blog.local
+127.0.0.1 blog.local

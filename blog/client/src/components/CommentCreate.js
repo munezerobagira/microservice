@@ -5,7 +5,7 @@ export function CommentCreate({ postId }) {
   const [content, setContent] = useState('');
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post(`http://comments.blog.com/posts/${postId}/comments`, { content });
+    await axios.post(`http://comments.blog.local/posts/${postId}/comments`, { content });
     setContent('');
   };
   return (

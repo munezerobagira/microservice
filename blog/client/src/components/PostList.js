@@ -6,7 +6,7 @@ import { CommentCreate } from './CommentCreate';
 export function PostList() {
   const [posts, setPosts] = useState({});
   const fetchPosts = async () => {
-    const res = await axios.get('http://query.blog.com/posts');
+    const res = await axios.get('http://query.blog.local/posts');
     setPosts(res.data);
   };
   useEffect(() => {
