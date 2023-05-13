@@ -5,7 +5,7 @@ export function PostCreate() {
   const [title, setTitle] = useState('');
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await axios.post('http://posts.blog.local/posts', {
+    await axios.post('http://posts.blog.local/posts', {
       title,
     });
     setTitle('');
