@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: ingress-service
   annotations:
-    kubernetes.io/ingress.class: ngnix
+    kubernetes.io/ingress.class: nginx
 spec:
   rules:
     - host: auth.ticketing.local
@@ -13,6 +13,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: auth-srv
+                name: auth-serv
                 port:
                   number: 3000
