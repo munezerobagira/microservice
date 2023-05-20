@@ -1,18 +1,25 @@
 import express from 'express';
-const app = express();
+import 'express-async-errors';
+import { NotFoundException } from './exceptions/not-found-exception';
+import { errorHandler } from './middleware/error-handler';
+
 import { currentUserRouter } from './routes/current-user';
 import { signinRouter } from './routes/signin';
 import { signoutRouter } from './routes/signout';
 import { signupRouter } from './routes/signup';
+const app = express();
+
 app.use(express.json());
 
 app.use(currentUserRouter);
 app.use(signinRouter);
 app.use(signupRouter);
 app.use(signoutRouter);
-app.get('/api/users/currentuser', (req, res) => {
-  res.send('Hi there');
+
+app.all('*', (req, res) => {
+  throw new NotFoundException();
 });
+app.use(errorHandler);
 app.listen(3000, () => {
   console.log('Server started on the port 3000!');
 });
