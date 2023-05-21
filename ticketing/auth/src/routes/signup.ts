@@ -1,9 +1,10 @@
 import express, { Request, Response } from 'express';
 import { body, FieldValidationError, validationResult } from 'express-validator';
 import { ConflictException } from '../exceptions/conflict-exception';
-import { DatabaseConnectionException } from '../exceptions/database-connection-exception';
 import { RequestValidationException } from '../exceptions/request-validaton-exception';
 import { User } from '../models/user';
+import jwt from 'jsonwebtoken';
+
 const router = express.Router();
 router.post(
   '/api/users/signup',
@@ -18,6 +19,10 @@ router.post(
     if (userExists) throw new ConflictException('User with email already exists');
     const user = User.build({ email, password });
     await user.save();
+    const token = await jwt.sign({ id: user.id, email: user.email }, process.env.JWT_KEY!);
+    req.session = {
+      jwt: token,
+    };
     res.send(user);
   }
 );

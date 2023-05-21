@@ -13,10 +13,22 @@ interface UserDoc extends mongoose.Document {
   email: string;
   password: string;
 }
-const userSchema = new mongoose.Schema({
-  email: String,
-  password: String,
-});
+const userSchema = new mongoose.Schema(
+  {
+    email: String,
+    password: String,
+  },
+  {
+    toJSON: {
+      transform(doc, ret) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.password;
+        delete ret.__v;
+      },
+    },
+  }
+);
 userSchema.pre('save', async function (done) {
   if (this.isModified('password') && this.password) {
     this.password = await Password.toHash(this.password);
