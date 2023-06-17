@@ -1,5 +1,5 @@
-import { scrypt, randomBytes } from 'crypto';
-import { promisify } from 'util';
+import {scrypt, randomBytes} from 'crypto';
+import {promisify} from 'util';
 const scryptAsync = promisify(scrypt);
 export class Password {
   static async toHash(password: string) {
