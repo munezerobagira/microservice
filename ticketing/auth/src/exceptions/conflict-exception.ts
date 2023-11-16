@@ -2,10 +2,10 @@ import { CustomException } from './custom-exception';
 
 export class ConflictException extends CustomException {
   statusCode = 409;
-  constructor(private msg: string) {
-    super('Conflict exception: ' + msg);
+  constructor(message: string) {
+    super('Conflict exception: ' + message);
   }
   serializeErrors(): { message: string; field?: string | undefined }[] {
-    return [{ message: this.msg }];
+    return [{ message: this.message }];
   }
 }
